@@ -1,0 +1,898 @@
+body {
+    background-image: url(../assets/images/fondoweb3.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: "Quicksand";
+    margin: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.ohmypole-logo img {
+    height: 90px;
+}
+
+a.ohmypole-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 80px;
+    font-family: Poppins;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(210, 170, 255, 0.45) 50%,
+            rgba(158, 31, 204, 0.35) 100%);
+    border-bottom: 1px solid rgba(150, 100, 255, 0.3);
+    position: relative;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    flex: 1;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: #9e1fcc;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.acceder {
+    background: #9e1fcc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+main {
+    flex: 1;
+}
+
+.hero {
+    text-align: center;
+    padding: 10px 20px;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.hero h1 {
+    font-size: 110px;
+    margin-bottom: 20px;
+    font-family: allura;
+}
+
+.hero h2 {
+    font-size: 25px;
+    margin-bottom: 20px;
+    font-family: Poppins;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.botones-hero {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.btn-reservar {
+    background: #9e1fcc;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.btn-horarios {
+    background: transparent;
+    border: 2px solid #9e1fcc;
+    color: #9e1fcc;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-horarios:hover {
+    background: #9e1fcc;
+    color: white;
+}
+
+.clases {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.clases h2 {
+    font-size: 25px;
+    color: #9e1fcc;
+    margin-bottom: 10px;
+    font-family: poppins;
+}
+
+.clases p {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.clases-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.circulo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+    border: 2px solid #9e1fcc;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.circulo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.circulo:hover {
+    transform: scale(1.20);
+}
+
+.clase h3 {
+    margin-top: 12px;
+    font-size: 18px;
+    color: #9e1fcc;
+    font-family: poppins;
+}
+
+.clase {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.clase a {
+    display: block;
+    text-decoration: none;
+}
+
+.contacto {
+    padding: 20px 60px;
+    text-align: center;
+
+    background: linear-gradient(0deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(210, 170, 255, 0.45) 50%,
+            rgba(158, 31, 204, 0.35) 100%);
+}
+
+.contacto h2 {
+    font-family: poppins;
+    color: #9e1fcc;
+}
+
+.contacto-container {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 1000px;
+}
+
+.contacto-container p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.info-contacto {
+    text-align: left;
+}
+
+.info-contacto a {
+    color: #9e1fcc;
+    text-decoration: none;
+}
+
+.redes a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #9e1fcc;
+    font-weight: 600;
+}
+
+.redes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    width: 220px;
+}
+
+.footer {
+    padding: 20px 60px;
+    border-top: 1px solid rgba(150, 100, 255, 0.3);
+    background-color: white;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 1000px;
+}
+
+.footer-container p:last-child {
+    text-align: left;
+    white-space: nowrap;
+    width: 220px;
+}
+
+.somos {
+    text-align: justify;
+    padding: 30px 20px;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 0px;
+    line-height: 1.5;
+}
+
+.somos+.somos {
+    padding-top: 0;
+}
+
+.somos h2 {
+    font-size: 25px;
+    color: #9e1fcc;
+    margin-bottom: 10px;
+    font-family: poppins;
+}
+
+.profes-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.profe {
+    width: 180px;
+    text-align: center;
+}
+
+.profe h3 {
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+.profe h4 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 5px;
+}
+
+.opiniones h3 {
+    font-size: 25px;
+    color: #9e1fcc;
+    font-family: poppins;
+    max-width: 800px;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: -30px;
+}
+
+.opiniones {
+    max-width: 1000px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+.poledance {
+    text-align: justify;
+    padding: 50px 20px 30px 20px;
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.5;
+}
+
+.poledance h2 {
+    font-size: 25px;
+    color: #9e1fcc;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: poppins;
+}
+
+.poleexotic {
+    text-align: justify;
+    padding: 50px 20px 30px 20px;
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.5;
+}
+
+.poleexotic h2 {
+    font-size: 25px;
+    color: #9e1fcc;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: poppins;
+}
+
+.polekids {
+    text-align: justify;
+    padding: 50px 20px 30px 20px;
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.5;
+}
+
+.polekids h2 {
+    font-size: 25px;
+    color: #9e1fcc;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: poppins;
+}
+
+.aereos {
+    text-align: justify;
+    padding: 50px 20px 30px 20px;
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.5;
+}
+
+.aereos h2 {
+    font-size: 25px;
+    color: #9e1fcc;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: poppins;
+}
+
+.aereos h3 {
+    font-size: 20px;
+    color: #9e1fcc;
+    margin-top: 30px;
+    margin-bottom: 8px;
+    font-family: poppins;
+}
+
+.aereos-cierre {
+    margin-top: 40px;
+    font-style: italic;
+    text-align: center;
+}
+
+.tarifas-intro {
+    text-align: center;
+    padding: 50px 20px 20px 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.tarifas-intro h2 {
+    font-size: 32px;
+    color: #9e1fcc;
+    font-family: Poppins;
+    margin-bottom: 10px;
+}
+
+.tarifas-intro p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.tarjetas-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 30px 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.tarjeta {
+    background: white;
+    border-radius: 16px;
+    border: 2px solid #9e1fcc;
+    box-shadow: 0 6px 20px rgba(158, 31, 204, 0.15);
+    padding: 30px 24px;
+    text-align: center;
+    width: 200px;
+    transition: transform 0.3s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-6px);
+}
+
+.tarjeta .precio {
+    font-size: 42px;
+    font-weight: 800;
+    color: #9e1fcc;
+    font-family: Poppins;
+    line-height: 1;
+}
+
+.tarjeta .precio span {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.tarjeta .descripcion {
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 12px;
+    color: #333;
+    font-family: Poppins;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.extras-section {
+    max-width: 900px;
+    margin: 10px auto 30px auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.extra-card {
+    background: white;
+    border-radius: 12px;
+    border-left: 5px solid #9e1fcc;
+    padding: 20px 24px;
+    flex: 1;
+    min-width: 260px;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.extra-card h4 {
+    font-family: Poppins;
+    color: #9e1fcc;
+    font-size: 17px;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+}
+
+.extra-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+    color: #444;
+}
+
+.nota-incluye {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    padding: 0 20px;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.7;
+}
+
+.nota-incluye strong {
+    color: #9e1fcc;
+}
+
+.horario-section {
+    max-width: 1100px;
+    margin: 0 auto 50px auto;
+    padding: 0 20px;
+}
+
+.horario-section h2 {
+    font-family: Poppins;
+    color: #9e1fcc;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.horario-tabla-wrap {
+    overflow-x: auto;
+}
+
+.horario-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Poppins;
+    font-size: 13px;
+    min-width: 700px;
+}
+
+.horario-tabla th {
+    background-color: #9e1fcc;
+    color: white;
+    padding: 10px 8px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.horario-tabla td {
+    border: 1px solid #ddd;
+    padding: 6px 8px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.td-hora {
+    font-weight: 800;
+    font-size: 16px;
+    color: white;
+    background-color: #9e1fcc;
+    white-space: nowrap;
+    text-align: center;
+    width: 60px;
+}
+
+.td-sala {
+    font-weight: 700;
+    font-size: 11px;
+    color: #555;
+    background-color: #f7f0ff;
+    white-space: nowrap;
+    text-transform: uppercase;
+    width: 80px;
+}
+
+.clase-pill {
+    display: inline-block;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-weight: 700;
+    font-size: 11px;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1.3;
+}
+
+.pd {
+    background-color: #00d4d4;
+}
+
+.pd3 {
+    background-color: #f5c400;
+}
+
+.pe {
+    background-color: #ff5252;
+    color: white;
+}
+
+.fl {
+    background-color: #ff4db8;
+    color: white;
+}
+
+.pl {
+    background-color: #aaff00;
+}
+
+.ae {
+    background-color: #b0b0b0;
+}
+
+.vt {
+    background-color: #4caf50;
+    color: white;
+}
+
+.leyenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 13px;
+    font-family: Poppins;
+}
+
+.leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.leyenda-color {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+}
+
+.tarifas-cta {
+    text-align: center;
+    padding: 20px 20px 50px 20px;
+}
+
+.tarifas-cta p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn-contactar {
+    background: #9e1fcc;
+    color: white;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: Poppins;
+    text-decoration: none;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.btn-contactar:hover {
+    background: #7a0fa8;
+}
+
+
+/* HAMBURGER */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+}
+
+.hamburger span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: #9e1fcc;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/*  RESPONSIVE — TABLET (≤ 900px) */
+@media (max-width: 900px) {
+    .navbar {
+        padding: 14px 24px;
+        flex-wrap: wrap;
+        gap: 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .acceder {
+        font-size: 15px;
+        padding: 8px 14px;
+    }
+
+    .menu {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        padding: 8px 0 4px 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 8px 20px rgba(158, 31, 204, 0.15);
+        z-index: 100;
+    }
+
+    .menu.open {
+        display: flex;
+    }
+
+    .menu.open {
+        display: flex;
+    }
+
+    .menu li {
+        padding: 12px 0;
+        border-top: 1px solid rgba(150, 100, 255, 0.2);
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 72px;
+    }
+
+    .hero h2 {
+        font-size: 20px;
+    }
+
+    .contacto {
+        padding: 20px 24px;
+    }
+
+    .contacto-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .info-contacto {
+        text-align: center;
+    }
+
+    .redes {
+        align-items: center;
+        width: auto;
+    }
+
+    .footer {
+        padding: 20px 24px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        text-align: center;
+    }
+
+    .footer-container p:last-child {
+        width: auto;
+        text-align: center;
+        white-space: normal;
+    }
+}
+
+
+/* RESPONSIVE — MÓVIL (≤ 480px) */
+@media (max-width: 480px) {
+    .ohmypole-logo img {
+        height: 60px;
+    }
+
+    .hero {
+        padding: 20px 16px;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+    }
+
+    .hero h2 {
+        font-size: 17px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .botones-hero {
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .btn-reservar,
+    .btn-horarios {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+    }
+
+    .somos h2,
+    .poledance h2,
+    .poleexotic h2,
+    .polekids h2,
+    .aereos h2,
+    .aereos h3 {
+        text-align: center;
+    }
+
+    .clases {
+        padding: 40px 16px;
+    }
+
+    .circulo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .tarjeta {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .extra-card {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .somos,
+    .poledance,
+    .poleexotic,
+    .polekids,
+    .aereos {
+        padding: 30px 16px;
+    }
+
+    .tarifas-intro h2 {
+        font-size: 26px;
+    }
+}

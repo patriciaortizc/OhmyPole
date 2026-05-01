@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Allura&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Tarifas | Oh my Pole</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="../index.html" class="ohmypole-logo">
+                <img src="../assets/images/ohmypole-logo.png" alt="Oh my pole">
+            </a>
+            <ul class="menu">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="quienessomos.html">Quiénes somos</a></li>
+                <li><a href="poledance.html">Pole dance</a></li>
+                <li><a href="poleexotic.html">Pole exotic</a></li>
+                <li><a href="polekids.html">Pole kids</a></li>
+                <li><a href="aereos.html">Aéreos</a></li>
+                <li><a href="tarifas.html">Tarifas</a></li>
+            </ul>
+            <Button class="acceder">Acceder</Button>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="tarifas-intro">
+            <h2>Horarios y Tarifas</h2>
+            <p>Descubre nuestros horarios y elige el plan que mejor se adapte a ti <strong>¡Comienza tu aventura en el
+                    pole
+                    dance hoy mismo!</strong></p>
+        </section>
+
+        <!-- TARJETAS DE PRECIO -->
+        <div class="tarjetas-container">
+            <div class="tarjeta">
+                <div class="precio">50€<span>/mes</span></div>
+                <div class="descripcion">1 clase semanal</div>
+            </div>
+            <div class="tarjeta">
+                <div class="precio">80€<span>/mes</span></div>
+                <div class="descripcion">2 clases semanales</div>
+            </div>
+            <div class="tarjeta">
+                <div class="precio">15€</div>
+                <div class="descripcion">1 clase suelta</div>
+            </div>
+        </div>
+
+        <!-- NOTA POLE LIBRE Y FLEXIBILIDAD -->
+        <div class="nota-incluye">
+            <p>Las clases de <strong>Pole Libre</strong> y <strong>Flexibilidad</strong> están incluidas en tu cuota
+                mensual: con el plan de <strong>80€</strong> puedes asistir a 2 clases semanales de cada modalidad, y
+                con el de <strong>50€</strong>, a 1 clase semanal.</p>
+        </div>
+
+        <!-- EXTRAS -->
+        <div class="extras-section">
+            <div class="extra-card">
+                <h3>Flexibilidad</h3>
+                <p>Clases de 1 hora enfocadas en la flexibilidad aplicada al pole dance y al cuidado del cuerpo. Incluye
+                    acceso ilimitado a las clases grabadas (hasta 3 clases semanales).</p>
+            </div>
+            <div class="extra-card">
+                <h3>Pole Libre</h3>
+                <p>Sesiones de entrenamiento sin instructor para que puedas venir a practicar por tu cuenta. Ideal para
+                    consolidar lo aprendido en clase y avanzar a tu ritmo.</p>
+            </div>
+        </div>
+
+        <!-- HORARIO -->
+        <section class="horario-section" id="horario-section">
+            <h2>Horarios 2025–2026</h2>
+            <div class="horario-tabla-wrap">
+                <table class="horario-tabla">
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Sala</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                            <th>Sábado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 10:00 -->
+                        <tr>
+                            <td class="td-hora" rowspan="3">10:00</td>
+                            <td class="td-sala">Sala 1</td>
+                            <td><span class="clase-pill pe">Pole Exotic</span></td>
+                            <td></td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                            <td></td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                        </tr>
+                        <tr>
+                            <td class="td-sala">Sala 2</td>
+                            <td></td>
+                            <td><span class="clase-pill pd">Pole Dance 2</span></td>
+                            <td></td>
+                            <td><span class="clase-pill pd">Pole Dance 2</span></td>
+                            <td></td>
+                            <td><span class="clase-pill pl">Pole Libre</span></td>
+                        </tr>
+                        <tr>
+                            <td class="td-sala">Sala Aéreos</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><span class="clase-pill ae">Aéreos</span></td>
+                        </tr>
+
+                        <!-- 11:30 -->
+                        <tr>
+                            <td class="td-hora" rowspan="3">11:30</td>
+                            <td class="td-sala">Sala 1</td>
+                            <td></td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                            <td><span class="clase-pill fl">Flexibilidad</span></td>
+                            <td></td>
+                            <td><span class="clase-pill fl">Flexibilidad</span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="td-sala">Sala 2</td>
+                            <td></td>
+                            <td><span class="clase-pill pl">Pole Libre</span></td>
+                            <td></td>
+                            <td><span class="clase-pill pl">Pole Libre</span></td>
+                            <td></td>
+                            <td><span class="clase-pill pd">Pole Dance 2</span></td>
+                        </tr>
+                        <tr>
+                            <td class="td-sala">Sala Aéreos</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <!-- 17:00 -->
+                        <tr>
+                            <td class="td-hora" rowspan="3">17:00</td>
+                            <td class="td-sala">Sala 1</td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                            <td></td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                            <td></td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="td-sala">Sala 2</td>
+                            <td><span class="clase-pill pd3">Pole Dance 3</span></td>
+                            <td><span class="clase-pill pd">Pole Dance 2</span></td>
+                            <td><span class="clase-pill pd">Pole Dance 2</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="td-sala">Sala Aéreos</td>
+                            <td><span class="clase-pill ae">Aéreos 18:00</span></td>
+                            <td></td>
+                            <td><span class="clase-pill ae">Telas</span></td>
+                            <td></td>
+                            <td><span class="clase-pill ae">Aro</span></td>
+                            <td></td>
+                        </tr>
+
+                        <!-- 18:30 -->
+                        <tr>
+                            <td class="td-hora" rowspan="3">18:30</td>
+                            <td class="td-sala">Sala 1</td>
+                            <td><span class="clase-pill pl">Pole Libre</span></td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                            <td><span class="clase-pill pl">Pole Libre</span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="td-sala">Sala 2</td>
+                            <td><span class="clase-pill pd">Pole Dance 2</span></td>
+                            <td><span class="clase-pill fl">Flexibilidad</span></td>
+                            <td><span class="clase-pill fl">Flexibilidad</span></td>
+                            <td><span class="clase-pill pd3">Pole Dance 3</span></td>
+                            <td><span class="clase-pill pd">Pole Dance 2</span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="td-sala">Sala Aéreos</td>
+                            <td></td>
+                            <td></td>
+                            <td><span class="clase-pill ae">Aro</span></td>
+                            <td></td>
+                            <td><span class="clase-pill ae">Telas</span></td>
+                            <td></td>
+                        </tr>
+
+                        <!-- 20:00 -->
+                        <tr>
+                            <td class="td-hora" rowspan="3">20:00</td>
+                            <td class="td-sala">Sala 1</td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                            <td><span class="clase-pill pe">Pole Exotic (20:30)</span></td>
+                            <td><span class="clase-pill pd">Pole Dance 1</span></td>
+                            <td><span class="clase-pill pe">Pole Exotic</span></td>
+                            <td><span class="clase-pill vt">Verticales</span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="td-sala">Sala 2</td>
+                            <td></td>
+                            <td><span class="clase-pill pd">Pole Dance 2</span></td>
+                            <td><span class="clase-pill pl">Pole Libre (19:30)</span></td>
+                            <td><span class="clase-pill fl">Flexibilidad</span></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="td-sala">Sala Aéreos</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- LEYENDA -->
+            <div class="leyenda">
+                <div class="leyenda-item">
+                    <div class="leyenda-color" style="background:#00d4d4;"></div> Pole Dance
+                </div>
+                <div class="leyenda-item">
+                    <div class="leyenda-color" style="background:#f5c400;"></div> Pole Dance 3
+                </div>
+                <div class="leyenda-item">
+                    <div class="leyenda-color" style="background:#ff5252;"></div> Pole Exotic
+                </div>
+                <div class="leyenda-item">
+                    <div class="leyenda-color" style="background:#ff4db8;"></div> Flexibilidad
+                </div>
+                <div class="leyenda-item">
+                    <div class="leyenda-color" style="background:#aaff00;"></div> Pole Libre
+                </div>
+                <div class="leyenda-item">
+                    <div class="leyenda-color" style="background:#b0b0b0;"></div> Aéreos / Telas / Aro
+                </div>
+                <div class="leyenda-item">
+                    <div class="leyenda-color" style="background:#4caf50;"></div> Verticales
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="tarifas-cta">
+            <p>¿Tienes alguna duda? ¡Anímate a contactarnos!</p>
+            <a href="https://wa.me/34645531072" class="btn-contactar">Contactar</a>
+        </div>
+
+    </main>
+
+    <section class="contacto">
+        <h2>Contacto</h2>
+        <div class="contacto-container">
+            <div class="info-contacto">
+                <p><strong>Oh my Pole</strong></p>
+                <p>Calle Aneto, 17, 28044, Fuenlabrada, Madrid</p>
+                <p>
+                    <a href="mailto:info@ohmypole.es">
+                        <i class="fa-regular fa-envelope"></i>
+                        <strong>info@ohmypole.es</strong>
+                    </a>
+                </p>
+            </div>
+            <div class="redes">
+                <a href="https://www.instagram.com/oh_my_pole_studio?igsh=c2FpZm5iMXFoYXc3">
+                    <i class="fa-brands fa-instagram"></i>
+                    Oh my Pole
+                </a>
+                <p>
+                    <a href="https://wa.me/34645531072" target="_blank">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        (+34)645531072
+                    </a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-container">
+            <p>© 2025 ohmypole–Todos los derechos reservados.</p>
+            <p>Diseñada con ♡ por Patricia Ortiz</p>
+        </div>
+    </footer>
+    <script src="../js/scripts.js"></script>
+</body>
+</html>
