@@ -36,7 +36,7 @@ window.login = async (e) => {
     const errorEl = document.getElementById('login-error');
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = 'mipanel.html';
+        window.location.href = user.email === 'patricia71195@hotmail.com' ? 'adminpanel.html' : 'mipanel.html';
     } catch (err) {
         errorEl.style.display = 'block';
         errorEl.textContent = traducirError(err.code);
@@ -65,7 +65,7 @@ window.registro = async (e) => {
         });
         successEl.style.display = 'block';
         successEl.textContent = '¡Cuenta creada! Redirigiendo...';
-        setTimeout(() => window.location.href = 'mipanel.html', 1500);
+        setTimeout(() => window.location.href = cred.user.email === 'patricia71195@hotmail.com' ? 'adminpanel.html' : 'mipanel.html', 1500);
     } catch (err) {
         errorEl.style.display = 'block';
         errorEl.textContent = traducirError(err.code);
