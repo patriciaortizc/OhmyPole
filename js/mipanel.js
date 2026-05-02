@@ -12,6 +12,8 @@ const firebaseConfig = {
     appId: "1:5555383295:web:e24f20e254feebea2615ca"
 };
 
+const ADMIN_EMAIL = 'patricia71195@hotmail.com';
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -74,6 +76,9 @@ onAuthStateChanged(auth, async (user) => {
     }
     usuarioActual = user;
     document.getElementById('nombre-usuario').textContent = user.displayName || user.email;
+    if (user.email === ADMIN_EMAIL) {
+        document.getElementById('btn-admin').style.display = 'inline-block';
+    }
     await cargarPerfil();
     await cargarReservas();
     renderHorario();
@@ -97,6 +102,8 @@ function estaAlDia() {
 }
 
 function mostrarEstadoPlan() {
+    if (usuarioActual.email === ADMIN_EMAIL) return;
+
     const header = document.getElementById('lista-reservas').closest('.reservas-section');
     const existing = document.getElementById('estado-plan');
     if (existing) existing.remove();
@@ -171,6 +178,13 @@ function renderHorario() {
     }).join('');
 }
 
+function getCategoriaClase(clase) {
+    if (clase.startsWith('Pole Dance')) return 'pole-dance';
+    if (clase === 'Pole Libre') return 'pole-libre';
+    if (clase === 'Flexibilidad') return 'flexibilidad';
+    return null; // sin restricción de plan
+}
+
 window.reservar = async (dia, hora, clase, sala) => {
     const clave = `${dia}-${hora}-${clase}-${sala}`;
 
@@ -180,23 +194,26 @@ window.reservar = async (dia, hora, clase, sala) => {
         return;
     }
 
-    // Sin plan asignado
-    if (!perfilUsuario || !perfilUsuario.plan) {
-        mostrarToast('⚠ No tienes un plan activo. Contacta con el estudio.');
-        return;
-    }
-
-    // Pago pendiente
-    if (!estaAlDia()) {
-        mostrarToast('⚠ Tu cuota de este mes no está registrada. Contacta con el estudio.');
-        return;
-    }
-
-    // Límite de reservas según plan
-    const limite = perfilUsuario.plan === '80' ? 2 : 1;
-    if (reservasUsuario.length >= limite) {
-        mostrarToast(`⚠ Has alcanzado el límite de tu plan (${limite} clase${limite > 1 ? 's' : ''}/semana)`);
-        return;
+    // Restricciones solo para alumnas (no para el admin)
+    if (usuarioActual.email !== ADMIN_EMAIL) {
+        if (!perfilUsuario || !perfilUsuario.plan) {
+            mostrarToast('⚠ No tienes un plan activo. Contacta con el estudio.');
+            return;
+        }
+        if (!estaAlDia()) {
+            mostrarToast('⚠ Tu cuota de este mes no está registrada. Contacta con el estudio.');
+            return;
+        }
+        const limite = perfilUsuario.plan === '80' ? 2 : 1;
+        const categoria = getCategoriaClase(clase);
+        if (categoria) {
+            const reservasCategoria = reservasUsuario.filter(r => getCategoriaClase(r.clase) === categoria);
+            if (reservasCategoria.length >= limite) {
+                const nombres = { 'pole-dance': 'Pole Dance', 'pole-libre': 'Pole Libre', 'flexibilidad': 'Flexibilidad' };
+                mostrarToast(`⚠ Límite de ${nombres[categoria]} alcanzado (${limite} por semana)`);
+                return;
+            }
+        }
     }
 
     await addDoc(collection(db, 'reservas'), {
