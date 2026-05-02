@@ -860,6 +860,10 @@ main {
     border-color: #9e1fcc;
 }
 
+.clase-item:hover .clase-nombre-item {
+    color: white;
+}
+
 .clase-item:hover .clase-hora,
 .clase-item:hover .clase-sala {
     color: rgba(255, 255, 255, 0.8);
@@ -868,6 +872,36 @@ main {
 .clase-item.reservada {
     background: #e8f5e9;
     border-color: #43a047;
+    cursor: default;
+}
+.clase-item.reservada:hover {
+    background: #e8f5e9;
+    color: inherit;
+    border-color: #43a047;
+}
+.clase-item.en-espera {
+    background: #fff8f0;
+    border-color: #ff9800;
+    cursor: default;
+}
+.clase-item.en-espera:hover {
+    background: #fff8f0;
+    color: inherit;
+    border-color: #ff9800;
+}
+.clase-item.completa {
+    background: #fafafa;
+    border-color: #ddd;
+    cursor: pointer;
+}
+.clase-item.completa:hover {
+    background: #e53935;
+    border-color: #e53935;
+}
+.clase-item.completa:hover .clase-nombre-item,
+.clase-item.completa:hover .clase-hora,
+.clase-item.completa:hover .clase-sala {
+    color: white;
 }
 
 .clase-nombre-item {
@@ -875,17 +909,26 @@ main {
     font-size: 13px;
     color: #9e1fcc;
 }
+.clase-item.reservada .clase-nombre-item { color: #2e7d32; }
+.clase-item.en-espera .clase-nombre-item { color: #e65100; }
+.clase-item.completa .clase-nombre-item  { color: #999; }
 
-.clase-item.reservada .clase-nombre-item {
-    color: #2e7d32;
+.plazas-badge {
+    font-size: 10px;
+    font-family: Poppins;
+    font-weight: 600;
+    margin-top: 5px;
+    color: #9e1fcc;
 }
+.reservada-badge { color: #2e7d32; }
+.espera-badge    { color: #e65100; }
+.completa-badge  { color: #e53935; }
 
 .clase-hora {
     font-size: 12px;
     color: #888;
     margin-top: 3px;
 }
-
 .clase-sala {
     font-size: 11px;
     color: #aaa;
@@ -1407,6 +1450,10 @@ main {
     border-color: #9e1fcc;
 }
 
+.clase-item:hover .clase-nombre-item {
+    color: white;
+}
+
 .clase-item:hover .clase-hora,
 .clase-item:hover .clase-sala {
     color: rgba(255, 255, 255, 0.8);
@@ -1415,6 +1462,36 @@ main {
 .clase-item.reservada {
     background: #e8f5e9;
     border-color: #43a047;
+    cursor: default;
+}
+.clase-item.reservada:hover {
+    background: #e8f5e9;
+    color: inherit;
+    border-color: #43a047;
+}
+.clase-item.en-espera {
+    background: #fff8f0;
+    border-color: #ff9800;
+    cursor: default;
+}
+.clase-item.en-espera:hover {
+    background: #fff8f0;
+    color: inherit;
+    border-color: #ff9800;
+}
+.clase-item.completa {
+    background: #fafafa;
+    border-color: #ddd;
+    cursor: pointer;
+}
+.clase-item.completa:hover {
+    background: #e53935;
+    border-color: #e53935;
+}
+.clase-item.completa:hover .clase-nombre-item,
+.clase-item.completa:hover .clase-hora,
+.clase-item.completa:hover .clase-sala {
+    color: white;
 }
 
 .clase-nombre-item {
@@ -1422,17 +1499,26 @@ main {
     font-size: 13px;
     color: #9e1fcc;
 }
+.clase-item.reservada .clase-nombre-item { color: #2e7d32; }
+.clase-item.en-espera .clase-nombre-item { color: #e65100; }
+.clase-item.completa .clase-nombre-item  { color: #999; }
 
-.clase-item.reservada .clase-nombre-item {
-    color: #2e7d32;
+.plazas-badge {
+    font-size: 10px;
+    font-family: Poppins;
+    font-weight: 600;
+    margin-top: 5px;
+    color: #9e1fcc;
 }
+.reservada-badge { color: #2e7d32; }
+.espera-badge    { color: #e65100; }
+.completa-badge  { color: #e53935; }
 
 .clase-hora {
     font-size: 12px;
     color: #888;
     margin-top: 3px;
 }
-
 .clase-sala {
     font-size: 11px;
     color: #aaa;

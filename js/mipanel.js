@@ -18,7 +18,19 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Horario completo
+const capacidades = {
+    'Pole Dance 1': 10,
+    'Pole Dance 2': 10,
+    'Pole Dance 3': 7,
+    'Pole Exotic': 10,
+    'Pole Libre': 12,
+    'Flexibilidad': 15,
+    'Aro': 8,
+    'Telas': 8,
+    'Aéreos': 8,
+    'Verticales': 10,
+};
+
 const horario = [
     { dia: 'Lunes', hora: '10:00', clase: 'Pole Exotic', sala: 'Sala 1' },
     { dia: 'Lunes', hora: '17:00', clase: 'Pole Dance 1', sala: 'Sala 1' },
@@ -67,7 +79,9 @@ const horario = [
 
 let usuarioActual = null;
 let reservasUsuario = [];
+let listaEsperaUsuario = [];
 let perfilUsuario = null;
+let conteoReservas = {};
 
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
@@ -80,7 +94,9 @@ onAuthStateChanged(auth, async (user) => {
         document.getElementById('btn-admin').style.display = 'inline-block';
     }
     await cargarPerfil();
+    await cargarConteoReservas();
     await cargarReservas();
+    await cargarListaEsperaUsuario();
     renderHorario();
 });
 
@@ -94,6 +110,30 @@ async function cargarPerfil() {
     }
 }
 
+async function cargarConteoReservas() {
+    try {
+        const snap = await getDocs(collection(db, 'reservas'));
+        conteoReservas = {};
+        snap.forEach(d => {
+            const clave = d.data().clave;
+            conteoReservas[clave] = (conteoReservas[clave] || 0) + 1;
+        });
+    } catch (e) {
+        conteoReservas = {};
+    }
+}
+
+async function cargarListaEsperaUsuario() {
+    try {
+        const q = query(collection(db, 'listaEspera'), where('uid', '==', usuarioActual.uid));
+        const snap = await getDocs(q);
+        listaEsperaUsuario = [];
+        snap.forEach(d => listaEsperaUsuario.push({ id: d.id, ...d.data() }));
+    } catch (e) {
+        listaEsperaUsuario = [];
+    }
+}
+
 function estaAlDia() {
     if (!perfilUsuario || !perfilUsuario.pagado || !perfilUsuario.fechaPago) return false;
     const hoy = new Date();
@@ -103,11 +143,9 @@ function estaAlDia() {
 
 function mostrarEstadoPlan() {
     if (usuarioActual.email === ADMIN_EMAIL) return;
-
     const header = document.getElementById('lista-reservas').closest('.reservas-section');
     const existing = document.getElementById('estado-plan');
     if (existing) existing.remove();
-
     let html = '';
     if (!perfilUsuario || !perfilUsuario.plan) {
         html = `<div id="estado-plan" style="background:#fff3e0;border-left:4px solid #ff9800;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-family:Poppins;font-size:14px;color:#e65100;">
@@ -136,19 +174,46 @@ async function cargarReservas() {
 
 function renderReservas() {
     const lista = document.getElementById('lista-reservas');
-    if (reservasUsuario.length === 0) {
+    const tieneReservas = reservasUsuario.length > 0;
+    const tieneEspera = listaEsperaUsuario.length > 0;
+
+    if (!tieneReservas && !tieneEspera) {
         lista.innerHTML = '<p class="sin-reservas">No tienes clases reservadas aún.</p>';
         return;
     }
-    lista.innerHTML = reservasUsuario.map(r => `
-                <div class="reserva-card">
-                    <div class="reserva-info">
-                        <div class="clase-nombre">${r.clase}</div>
-                        <div class="clase-detalle">${r.dia} · ${r.hora} · ${r.sala}</div>
-                    </div>
-                    <button class="btn-cancelar" onclick="cancelarReserva('${r.id}')">Cancelar</button>
+
+    let html = '';
+    if (tieneReservas) {
+        html += reservasUsuario.map(r => `
+            <div class="reserva-card">
+                <div class="reserva-info">
+                    <div class="clase-nombre">${r.clase}</div>
+                    <div class="clase-detalle">${r.dia} · ${r.hora} · ${r.sala}</div>
                 </div>
-            `).join('');
+                <button class="btn-cancelar" onclick="cancelarReserva('${r.id}', '${r.clave}')">Cancelar</button>
+            </div>
+        `).join('');
+    }
+    if (tieneEspera) {
+        html += listaEsperaUsuario.map(e => `
+            <div class="reserva-card" style="border-left: 3px solid #ff9800; background: #fff8f0;">
+                <div class="reserva-info">
+                    <div class="clase-nombre" style="color:#e65100;">${e.clase}</div>
+                    <div class="clase-detalle">${e.dia} · ${e.hora} · ${e.sala}</div>
+                    <div class="clase-detalle" style="color:#ff9800; margin-top:4px;">⏳ En lista de espera</div>
+                </div>
+                <button class="btn-cancelar" onclick="cancelarEspera('${e.id}')">Cancelar</button>
+            </div>
+        `).join('');
+    }
+    lista.innerHTML = html;
+}
+
+function getCategoriaClase(clase) {
+    if (clase.startsWith('Pole Dance')) return 'pole-dance';
+    if (clase === 'Pole Libre') return 'pole-libre';
+    if (clase === 'Flexibilidad') return 'flexibilidad';
+    return null;
 }
 
 function renderHorario() {
@@ -157,44 +222,61 @@ function renderHorario() {
     grid.innerHTML = dias.map(dia => {
         const clasesDelDia = horario.filter(c => c.dia === dia);
         return `
-                    <div class="dia-bloque">
-                        <div class="dia-titulo">${dia}</div>
-                        <div class="clases-lista">
-                            ${clasesDelDia.map(c => {
-            const clave = `${c.dia}-${c.hora}-${c.clase}-${c.sala}`;
-            const yaReservada = reservasUsuario.some(r => r.clave === clave);
-            return `
-                                    <div class="clase-item ${yaReservada ? 'reservada' : ''}"
-                                         onclick="reservar('${c.dia}','${c.hora}','${c.clase}','${c.sala}')">
-                                        <div class="clase-nombre-item">${c.clase}${c.nota ? ` (${c.nota})` : ''}</div>
-                                        <div class="clase-hora">${c.hora}</div>
-                                        <div class="clase-sala">${c.sala}</div>
-                                    </div>
-                                `;
-        }).join('')}
-                        </div>
-                    </div>
-                `;
-    }).join('');
-}
+            <div class="dia-bloque">
+                <div class="dia-titulo">${dia}</div>
+                <div class="clases-lista">
+                    ${clasesDelDia.map(c => {
+                        const clave = `${c.dia}-${c.hora}-${c.clase}-${c.sala}`;
+                        const yaReservada = reservasUsuario.some(r => r.clave === clave);
+                        const enEspera = listaEsperaUsuario.some(e => e.clave === clave);
+                        const capacidad = capacidades[c.clase] || 20;
+                        const ocupadas = conteoReservas[clave] || 0;
+                        const libres = capacidad - ocupadas;
+                        const completa = libres <= 0;
 
-function getCategoriaClase(clase) {
-    if (clase.startsWith('Pole Dance')) return 'pole-dance';
-    if (clase === 'Pole Libre') return 'pole-libre';
-    if (clase === 'Flexibilidad') return 'flexibilidad';
-    return null; // sin restricción de plan
+                        let estadoHtml = '';
+                        if (yaReservada) {
+                            estadoHtml = `<div class="plazas-badge reservada-badge">✓ Reservada</div>`;
+                        } else if (enEspera) {
+                            estadoHtml = `<div class="plazas-badge espera-badge">⏳ En espera</div>`;
+                        } else if (completa) {
+                            estadoHtml = `<div class="plazas-badge completa-badge">Completa</div>`;
+                        } else {
+                            estadoHtml = `<div class="plazas-badge">${libres} plaza${libres !== 1 ? 's' : ''}</div>`;
+                        }
+
+                        let claseItem = 'clase-item';
+                        if (yaReservada) claseItem += ' reservada';
+                        else if (enEspera) claseItem += ' en-espera';
+                        else if (completa) claseItem += ' completa';
+
+                        const accion = yaReservada ? '' :
+                            enEspera ? '' :
+                            completa
+                                ? `onclick="apuntarseEspera('${c.dia}','${c.hora}','${c.clase}','${c.sala}')"`
+                                : `onclick="reservar('${c.dia}','${c.hora}','${c.clase}','${c.sala}')"`;
+
+                        return `
+                            <div class="${claseItem}" ${accion}>
+                                <div class="clase-nombre-item">${c.clase}${c.nota ? ` (${c.nota})` : ''}</div>
+                                <div class="clase-hora">${c.hora}</div>
+                                <div class="clase-sala">${c.sala}</div>
+                                ${estadoHtml}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    }).join('');
 }
 
 window.reservar = async (dia, hora, clase, sala) => {
     const clave = `${dia}-${hora}-${clase}-${sala}`;
-
-    // Ya tiene esta clase reservada
     if (reservasUsuario.some(r => r.clave === clave)) {
         mostrarToast('Ya tienes esta clase reservada');
         return;
     }
-
-    // Restricciones solo para alumnas (no para el admin)
     if (usuarioActual.email !== ADMIN_EMAIL) {
         if (!perfilUsuario || !perfilUsuario.plan) {
             mostrarToast('⚠ No tienes un plan activo. Contacta con el estudio.');
@@ -215,7 +297,6 @@ window.reservar = async (dia, hora, clase, sala) => {
             }
         }
     }
-
     await addDoc(collection(db, 'reservas'), {
         uid: usuarioActual.uid,
         email: usuarioActual.email,
@@ -224,14 +305,85 @@ window.reservar = async (dia, hora, clase, sala) => {
         fechaReserva: new Date().toISOString()
     });
     mostrarToast(`✓ Clase reservada: ${clase} · ${dia} ${hora}`);
+    await cargarConteoReservas();
     await cargarReservas();
     renderHorario();
 };
 
-window.cancelarReserva = async (id) => {
+window.apuntarseEspera = async (dia, hora, clase, sala) => {
+    const clave = `${dia}-${hora}-${clase}-${sala}`;
+    if (listaEsperaUsuario.some(e => e.clave === clave)) {
+        mostrarToast('Ya estás en la lista de espera de esta clase');
+        return;
+    }
+    if (usuarioActual.email !== ADMIN_EMAIL) {
+        if (!perfilUsuario || !perfilUsuario.plan) {
+            mostrarToast('⚠ No tienes un plan activo. Contacta con el estudio.');
+            return;
+        }
+        if (!estaAlDia()) {
+            mostrarToast('⚠ Tu cuota de este mes no está registrada. Contacta con el estudio.');
+            return;
+        }
+    }
+    await addDoc(collection(db, 'listaEspera'), {
+        uid: usuarioActual.uid,
+        email: usuarioActual.email,
+        nombre: usuarioActual.displayName,
+        dia, hora, clase, sala, clave,
+        fechaEspera: new Date().toISOString()
+    });
+    mostrarToast(`⏳ Apuntada a lista de espera: ${clase} · ${dia} ${hora}`);
+    await cargarListaEsperaUsuario();
+    renderReservas();
+    renderHorario();
+};
+
+window.cancelarReserva = async (id, clave) => {
     await deleteDoc(doc(db, 'reservas', id));
-    mostrarToast('Reserva cancelada');
+    conteoReservas[clave] = Math.max(0, (conteoReservas[clave] || 1) - 1);
+
+    // Promover al primero de la lista de espera si hay alguien
+    try {
+        const qEspera = query(collection(db, 'listaEspera'), where('clave', '==', clave));
+        const snapEspera = await getDocs(qEspera);
+        if (!snapEspera.empty) {
+            const entradas = [];
+            snapEspera.forEach(d => entradas.push({ id: d.id, ...d.data() }));
+            entradas.sort((a, b) => new Date(a.fechaEspera) - new Date(b.fechaEspera));
+            const primero = entradas[0];
+            await addDoc(collection(db, 'reservas'), {
+                uid: primero.uid,
+                email: primero.email,
+                nombre: primero.nombre,
+                dia: primero.dia,
+                hora: primero.hora,
+                clase: primero.clase,
+                sala: primero.sala,
+                clave: primero.clave,
+                fechaReserva: new Date().toISOString(),
+                promovidoDesdeEspera: true
+            });
+            await deleteDoc(doc(db, 'listaEspera', primero.id));
+            mostrarToast('Reserva cancelada · Clase asignada a la siguiente en lista de espera');
+        } else {
+            mostrarToast('Reserva cancelada');
+        }
+    } catch (e) {
+        mostrarToast('Reserva cancelada');
+    }
+
+    await cargarConteoReservas();
     await cargarReservas();
+    await cargarListaEsperaUsuario();
+    renderHorario();
+};
+
+window.cancelarEspera = async (id) => {
+    await deleteDoc(doc(db, 'listaEspera', id));
+    mostrarToast('Eliminada de la lista de espera');
+    await cargarListaEsperaUsuario();
+    renderReservas();
     renderHorario();
 };
 
