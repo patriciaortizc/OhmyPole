@@ -695,6 +695,415 @@ main {
 }
 
 
+.panel-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.panel-header h2 {
+    font-family: Poppins;
+    color: #9e1fcc;
+    font-size: 26px;
+    margin: 0;
+}
+
+.btn-salir {
+    background: transparent;
+    border: 2px solid #9e1fcc;
+    color: #9e1fcc;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: Poppins;
+    transition: 0.3s;
+}
+
+.btn-salir:hover {
+    background: #9e1fcc;
+    color: white;
+}
+
+/* MIS RESERVAS */
+.reservas-section {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 16px rgba(158, 31, 204, 0.1);
+    margin-bottom: 32px;
+}
+
+.reservas-section h3 {
+    font-family: Poppins;
+    color: #9e1fcc;
+    margin: 0 0 20px 0;
+    font-size: 20px;
+}
+
+.sin-reservas {
+    color: #aaa;
+    font-size: 15px;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.reserva-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: #f7f0ff;
+    margin-bottom: 10px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.reserva-info {
+    font-family: Poppins;
+}
+
+.reserva-info .clase-nombre {
+    font-weight: 700;
+    color: #9e1fcc;
+    font-size: 15px;
+}
+
+.reserva-info .clase-detalle {
+    font-size: 13px;
+    color: #666;
+    margin-top: 3px;
+}
+
+.btn-cancelar {
+    background: transparent;
+    border: 1.5px solid #e53935;
+    color: #e53935;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: Poppins;
+    font-weight: 600;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.btn-cancelar:hover {
+    background: #e53935;
+    color: white;
+}
+
+/* HORARIO */
+.horario-panel h3 {
+    font-family: Poppins;
+    color: #9e1fcc;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.dias-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.dia-bloque {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(158, 31, 204, 0.08);
+}
+
+.dia-titulo {
+    font-family: Poppins;
+    font-weight: 700;
+    color: #9e1fcc;
+    font-size: 16px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.clases-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.clase-item {
+    background: #f7f0ff;
+    border: 1.5px solid rgba(158, 31, 204, 0.2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: Poppins;
+    min-width: 160px;
+}
+
+.clase-item:hover {
+    background: #9e1fcc;
+    color: white;
+    border-color: #9e1fcc;
+}
+
+.clase-item:hover .clase-hora,
+.clase-item:hover .clase-sala {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.clase-item.reservada {
+    background: #e8f5e9;
+    border-color: #43a047;
+}
+
+.clase-nombre-item {
+    font-weight: 700;
+    font-size: 13px;
+    color: #9e1fcc;
+}
+
+.clase-item.reservada .clase-nombre-item {
+    color: #2e7d32;
+}
+
+.clase-hora {
+    font-size: 12px;
+    color: #888;
+    margin-top: 3px;
+}
+
+.clase-sala {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 2px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #9e1fcc;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 999;
+}
+
+.admin-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.admin-header h2 {
+    font-family: Poppins;
+    color: #9e1fcc;
+    font-size: 26px;
+    margin: 0;
+}
+.admin-header-btns {
+    display: flex;
+    gap: 12px;
+}
+.btn-salir {
+    background: transparent;
+    border: 2px solid #9e1fcc;
+    color: #9e1fcc;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: Poppins;
+    transition: 0.3s;
+}
+.btn-salir:hover { background: #9e1fcc; color: white; }
+
+.stats-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 24px;
+    box-shadow: 0 4px 16px rgba(158,31,204,0.1);
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+}
+.stat-card .num {
+    font-family: Poppins;
+    font-size: 32px;
+    font-weight: 800;
+    color: #9e1fcc;
+}
+.stat-card .label {
+    font-size: 13px;
+    color: #888;
+    font-family: Poppins;
+    margin-top: 4px;
+}
+.alumnas-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.alumna-card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 16px rgba(158,31,204,0.08);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.alumna-card.sin-pagar { border-left: 4px solid #e53935; }
+.alumna-card.pagada    { border-left: 4px solid #43a047; }
+.alumna-card.sin-plan  { border-left: 4px solid #bbb; }
+.alumna-info {
+    flex: 1;
+    min-width: 160px;
+}
+.alumna-nombre {
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 15px;
+    color: #333;
+}
+.alumna-email {
+    font-size: 13px;
+    color: #888;
+    margin-top: 2px;
+}
+.alumna-fecha {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 2px;
+}
+.badge-pago {
+    font-size: 11px;
+    font-family: Poppins;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 6px;
+    display: inline-block;
+}
+.badge-pago.al-dia    { background: #e8f5e9; color: #2e7d32; }
+.badge-pago.pendiente { background: #ffebee; color: #c62828; }
+.badge-pago.sin-plan  { background: #f5f5f5; color: #999; }
+.alumna-controles {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.select-plan {
+    padding: 8px 12px;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    font-family: Poppins;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.select-plan:focus { outline: none; border-color: #9e1fcc; }
+.btn-pagado {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: Poppins;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1.5px solid #43a047;
+    color: #43a047;
+    background: transparent;
+    white-space: nowrap;
+}
+.btn-pagado.activo { background: #43a047; color: white; }
+.btn-pagado:hover  { background: #43a047; color: white; }
+.btn-eliminar {
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: Poppins;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1.5px solid #e53935;
+    color: #e53935;
+    background: transparent;
+}
+.btn-eliminar:hover { background: #e53935; color: white; }
+.aviso-mes {
+    background: #fff3e0;
+    border-left: 4px solid #ff9800;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 24px;
+    font-family: Poppins;
+    font-size: 14px;
+    color: #e65100;
+}
+.aviso-mes strong { font-weight: 700; }
+.loading-msg {
+    text-align: center;
+    color: #aaa;
+    font-family: Poppins;
+    padding: 40px;
+}
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #9e1fcc;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 999;
+}
+@media (max-width: 600px) {
+    .alumna-card { flex-direction: column; align-items: flex-start; }
+    .alumna-controles { width: 100%; justify-content: flex-start; }
+}
+
+
 /* HAMBURGER */
 .hamburger {
     display: none;

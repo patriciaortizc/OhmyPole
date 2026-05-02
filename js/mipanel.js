@@ -1,9 +1,7 @@
 
-// Página de mi panel
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
-import { getFirestore, collection, addDoc, deleteDoc, doc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, deleteDoc, doc, getDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB5eB36TuhUf275ArTsXxJ3XfwQocu-7TU",
@@ -67,6 +65,7 @@ const horario = [
 
 let usuarioActual = null;
 let reservasUsuario = [];
+let perfilUsuario = null;
 
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
@@ -75,9 +74,50 @@ onAuthStateChanged(auth, async (user) => {
     }
     usuarioActual = user;
     document.getElementById('nombre-usuario').textContent = user.displayName || user.email;
+    await cargarPerfil();
     await cargarReservas();
     renderHorario();
 });
+
+async function cargarPerfil() {
+    try {
+        const snap = await getDoc(doc(db, 'usuarios', usuarioActual.uid));
+        perfilUsuario = snap.exists() ? snap.data() : null;
+        mostrarEstadoPlan();
+    } catch (e) {
+        perfilUsuario = null;
+    }
+}
+
+function estaAlDia() {
+    if (!perfilUsuario || !perfilUsuario.pagado || !perfilUsuario.fechaPago) return false;
+    const hoy = new Date();
+    const fechaPago = new Date(perfilUsuario.fechaPago);
+    return fechaPago.getMonth() === hoy.getMonth() && fechaPago.getFullYear() === hoy.getFullYear();
+}
+
+function mostrarEstadoPlan() {
+    const header = document.getElementById('lista-reservas').closest('.reservas-section');
+    const existing = document.getElementById('estado-plan');
+    if (existing) existing.remove();
+
+    let html = '';
+    if (!perfilUsuario || !perfilUsuario.plan) {
+        html = `<div id="estado-plan" style="background:#fff3e0;border-left:4px solid #ff9800;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-family:Poppins;font-size:14px;color:#e65100;">
+                    <strong>Sin plan asignado</strong> — Contacta con el estudio para activar tu suscripción.
+                </div>`;
+    } else if (!estaAlDia()) {
+        html = `<div id="estado-plan" style="background:#ffebee;border-left:4px solid #e53935;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-family:Poppins;font-size:14px;color:#c62828;">
+                    <strong>Pago pendiente</strong> — Tu cuota de este mes no está registrada. Contacta con el estudio.
+                </div>`;
+    } else {
+        const limite = perfilUsuario.plan === '80' ? 2 : 1;
+        html = `<div id="estado-plan" style="background:#e8f5e9;border-left:4px solid #43a047;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-family:Poppins;font-size:14px;color:#2e7d32;">
+                    <strong>Plan ${perfilUsuario.plan}€/mes</strong> — Puedes reservar hasta <strong>${limite} clase${limite > 1 ? 's' : ''} por semana</strong>. Al día ✓
+                </div>`;
+    }
+    header.insertAdjacentHTML('afterbegin', html);
+}
 
 async function cargarReservas() {
     const q = query(collection(db, 'reservas'), where('uid', '==', usuarioActual.uid));
@@ -133,10 +173,32 @@ function renderHorario() {
 
 window.reservar = async (dia, hora, clase, sala) => {
     const clave = `${dia}-${hora}-${clase}-${sala}`;
+
+    // Ya tiene esta clase reservada
     if (reservasUsuario.some(r => r.clave === clave)) {
         mostrarToast('Ya tienes esta clase reservada');
         return;
     }
+
+    // Sin plan asignado
+    if (!perfilUsuario || !perfilUsuario.plan) {
+        mostrarToast('⚠ No tienes un plan activo. Contacta con el estudio.');
+        return;
+    }
+
+    // Pago pendiente
+    if (!estaAlDia()) {
+        mostrarToast('⚠ Tu cuota de este mes no está registrada. Contacta con el estudio.');
+        return;
+    }
+
+    // Límite de reservas según plan
+    const limite = perfilUsuario.plan === '80' ? 2 : 1;
+    if (reservasUsuario.length >= limite) {
+        mostrarToast(`⚠ Has alcanzado el límite de tu plan (${limite} clase${limite > 1 ? 's' : ''}/semana)`);
+        return;
+    }
+
     await addDoc(collection(db, 'reservas'), {
         uid: usuarioActual.uid,
         email: usuarioActual.email,

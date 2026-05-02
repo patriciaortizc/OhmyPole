@@ -1,6 +1,6 @@
-//Página de acceder y registrarse
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB5eB36TuhUf275ArTsXxJ3XfwQocu-7TU",
@@ -13,6 +13,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 window.mostrarLogin = () => {
     document.getElementById('form-login').style.display = 'block';
@@ -52,6 +53,16 @@ window.registro = async (e) => {
     try {
         const cred = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(cred.user, { displayName: nombre });
+        await setDoc(doc(db, 'usuarios', cred.user.uid), {
+            uid: cred.user.uid,
+            nombre: nombre,
+            email: email,
+            plan: null,
+            pagado: false,
+            fechaPago: null,
+            matricula: true,
+            fechaRegistro: new Date().toISOString()
+        });
         successEl.style.display = 'block';
         successEl.textContent = '¡Cuenta creada! Redirigiendo...';
         setTimeout(() => window.location.href = 'mipanel.html', 1500);
@@ -72,4 +83,3 @@ function traducirError(code) {
     };
     return errores[code] || 'Ha ocurrido un error. Inténtalo de nuevo.';
 }
-
