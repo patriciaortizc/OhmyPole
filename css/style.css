@@ -766,7 +766,7 @@ main {
     background: #f7f0ff;
     margin-bottom: 10px;
     gap: 12px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .reserva-info {
@@ -797,6 +797,8 @@ main {
     font-weight: 600;
     transition: 0.3s;
     white-space: nowrap;
+    flex-shrink: 0;
+    align-self: center;
 }
 
 .btn-cancelar:hover {
@@ -1311,7 +1313,7 @@ main {
     background: #f7f0ff;
     margin-bottom: 10px;
     gap: 12px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .reserva-info {
@@ -1342,6 +1344,8 @@ main {
     font-weight: 600;
     transition: 0.3s;
     white-space: nowrap;
+    flex-shrink: 0;
+    align-self: center;
 }
 
 .btn-cancelar:hover {
