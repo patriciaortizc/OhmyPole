@@ -15,18 +15,11 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-window.login = async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
-    const errorEl = document.getElementById('login-error');
-    try {
-        await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = email === 'patricia71195@hotmail.com' ? 'adminpanel.html' : 'mipanel.html';
-    } catch (err) {
-        errorEl.style.display = 'block';
-        errorEl.textContent = traducirError(err.code);
-    }
+window.mostrarLogin = () => {
+    document.getElementById('form-login').style.display = 'block';
+    document.getElementById('form-registro').style.display = 'none';
+    document.getElementById('tab-login').classList.add('active');
+    document.getElementById('tab-registro').classList.remove('active');
 };
 
 window.mostrarRegistro = () => {
@@ -43,7 +36,7 @@ window.login = async (e) => {
     const errorEl = document.getElementById('login-error');
     try {
         await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = user.email === 'patricia71195@hotmail.com' ? 'adminpanel.html' : 'mipanel.html';
+        window.location.href = email === 'patricia71195@hotmail.com' ? 'adminpanel.html' : 'mipanel.html';
     } catch (err) {
         errorEl.style.display = 'block';
         errorEl.textContent = traducirError(err.code);
@@ -72,7 +65,7 @@ window.registro = async (e) => {
         });
         successEl.style.display = 'block';
         successEl.textContent = '¡Cuenta creada! Redirigiendo...';
-        setTimeout(() => window.location.href = cred.user.email === 'patricia71195@hotmail.com' ? 'adminpanel.html' : 'mipanel.html', 1500);
+        setTimeout(() => window.location.href = 'mipanel.html', 1500);
     } catch (err) {
         errorEl.style.display = 'block';
         errorEl.textContent = traducirError(err.code);
@@ -88,5 +81,5 @@ function traducirError(code) {
         'auth/weak-password': 'La contraseña debe tener al menos 6 caracteres.',
         'auth/invalid-credential': 'Email o contraseña incorrectos.'
     };
-    return errores[code] || 'Ha ocurrido un error. Inténtalo de nuevo.';
+    return errores[code] || `Error: ${code}`;
 }

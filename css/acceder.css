@@ -1,0 +1,104 @@
+.auth-container {
+    max-width: 420px;
+    margin: 60px auto;
+    background: white;
+    border-radius: 20px;
+    padding: 40px 36px;
+    box-shadow: 0 8px 30px rgba(158,31,204,0.15);
+    border: 1px solid rgba(158,31,204,0.15);
+}
+.auth-container h2 {
+    font-family: Poppins;
+    color: #9e1fcc;
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 26px;
+}
+.auth-container p.subtitle {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+.tabs {
+    display: flex;
+    margin-bottom: 28px;
+    border-bottom: 2px solid #eee;
+}
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    font-family: Poppins;
+    font-weight: 600;
+    color: #aaa;
+    transition: 0.3s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+}
+.tab.active {
+    color: #9e1fcc;
+    border-bottom: 3px solid #9e1fcc;
+}
+.form-group {
+    margin-bottom: 18px;
+}
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+    font-family: Poppins;
+}
+.form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: Quicksand;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+.form-group input:focus {
+    outline: none;
+    border-color: #9e1fcc;
+}
+.btn-auth {
+    width: 100%;
+    background: #9e1fcc;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: Poppins;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 8px;
+}
+.btn-auth:hover {
+    background: #7a0fa8;
+}
+.error-msg {
+    color: #e53935;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 12px;
+    display: none;
+    font-family: Poppins;
+}
+.success-msg {
+    color: #43a047;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 12px;
+    display: none;
+    font-family: Poppins;
+}
+#form-registro {
+    display: none;
+}
